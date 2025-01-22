@@ -74,7 +74,7 @@ node .
 ###  Commands
 | Command | Description | Example |
 |---------|-------------|---------|
-| `/setup` | Configure IPMI settings | `/setup ip:192.168.1.100 username:admin password:pass` |
+| `/setup` | Configure IPMI settings | `/setup server_name: ip:192.168.1.100 username:admin password:pass` |
 | `/monitor start` | Sends and starts the Monitor embed | `/monitor start` |
 | `/monitor stop` | Stops the monitor embed and makes it not update | `/monitor stop` |
 | `/server status` | Get power status | `/server status` |
