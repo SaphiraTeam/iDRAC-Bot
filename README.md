@@ -47,6 +47,10 @@ DISCORD_TOKEN=your_discord_bot_token
 CLIENT_ID=your_discord_application_id
 GUILD_ID=your_discord_server_id
 IPMI_TOOL_PATH=/path/to/ipmitool
+AUTHORIZED_ROLES=role1,role2 
+AUTHORIZED_USERS=userid1,userid2 
+MONITOR_REFRESH_RATE=30000 
+
 ```
 
 3. **Start the Bot**
@@ -71,6 +75,8 @@ node .
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/setup` | Configure IPMI settings | `/setup ip:192.168.1.100 username:admin password:pass` |
+| `/monitor start` | Sends and starts the Monitor embed | `/server fans` |
+| `/monitor stop` | Stops the monitor embed and makes it not update | `/server fans` |
 | `/server status` | Get power status | `/server status` |
 | `/server fans` | View fan speeds | `/server fans` |
 | `/server setfan` | Set fan speed | `speed: 0-100` |
@@ -106,6 +112,9 @@ node .
 - discord.js: ^14.0.0
 - sqlite3: ^5.0.0
 - dotenv: ^16.0.0
+
+### System Dependencies
+- IPMI Tool (Windows) [Download from Dell](https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=m63f3)
 
 ## 📜 License
 
