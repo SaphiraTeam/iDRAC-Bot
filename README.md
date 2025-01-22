@@ -31,7 +31,7 @@ A powerful Discord bot for managing Dell servers remotely through IPMI commands.
 1. **System Setup**
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/iDRAC-Bot.git
+git clone https://github.com/saphirateam/iDRAC-Bot.git
 cd iDRAC-Bot
 
 # Install dependencies
