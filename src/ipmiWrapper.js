@@ -10,13 +10,21 @@ class IPMIWrapper {
         this.password = password;
     }
 
+    sanitizeErrorMessage(error) {
+        let message = error.message;
+        message = message.replace(this.password, 'Redacted');
+        message = message.replace(this.username, 'Redacted');
+        message = message.replace(this.ip, 'Redacted');
+        return message;
+    }
+
     async executeCommand(command) {
         const baseCmd = `"${ipmiToolPath}" -I lanplus -H ${this.ip} -U ${this.username} -P ${this.password}`;
         try {
             const { stdout } = await execAsync(`${baseCmd} ${command}`);
             return stdout.trim();
         } catch (error) {
-            throw new Error(`IPMI command failed: ${error.message}`);
+            throw new Error(`IPMI command failed: ${this.sanitizeErrorMessage(error)}`);
         }
     }
 

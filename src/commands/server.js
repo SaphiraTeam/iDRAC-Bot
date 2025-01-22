@@ -9,15 +9,27 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('status')
-                .setDescription('Get server power status'))
+                .setDescription('Get server power status')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('power')
-                .setDescription('Get power usage information'))
+                .setDescription('Get power usage information')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('fans')
-                .setDescription('Get fan speeds'))
+                .setDescription('Get fan speeds')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setfan')
@@ -25,35 +37,68 @@ module.exports = {
                 .addIntegerOption(option =>
                     option.setName('speed')
                         .setDescription('Fan speed percentage (0-100)')
-                        .setRequired(true)))
+                        .setRequired(true))
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('temperature')
-                .setDescription('Get temperature readings'))
+                .setDescription('Get temperature readings')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('sensors')
-                .setDescription('Get all sensor readings'))
+                .setDescription('Get all sensor readings')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('powersupply')
-                .setDescription('Get power supply information'))
+                .setDescription('Get power supply information')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false)))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('energy')
-                .setDescription('Get energy consumption information')),
+                .setDescription('Get energy consumption information')
+                .addStringOption(option =>
+                    option.setName('server_name')
+                        .setDescription('Name of the server to manage')
+                        .setRequired(false))),
 
     async execute(interaction) {
-        const config = await Database.getConfig(interaction.user.id);
+        const serverName = interaction.options.getString('server_name');
+        let config;
+        
+        if (serverName) {
+            config = await Database.getConfig(interaction.user.id, serverName);
+        } else {
+            config = await Database.getDefaultServer(interaction.user.id);
+        }
+        
         if (!config) {
-            await interaction.reply({ content: 'Please set up IPMI configuration first using /setup', ephemeral: true });
+            await interaction.reply({ 
+                content: serverName 
+                    ? `Server "${serverName}" not found. Please set up IPMI configuration first using /setup`
+                    : 'No servers configured. Please set up IPMI configuration first using /setup', 
+                flags: ['Ephemeral'] 
+            });
             return;
         }
 
         const ipmi = new IPMIWrapper(config.ipmi_ip, config.username, config.password);
 
         try {
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: ['Ephemeral'] });
             let response;
 
             switch (interaction.options.getSubcommand()) {
@@ -89,7 +134,9 @@ module.exports = {
                     break;
             }
 
-            await interaction.editReply({ content: `\`\`\`\n${response}\n\`\`\`` });
+            await interaction.editReply({ 
+                content: `# Server: ${config.server_name} | ${config.ipmi_ip}\n\`\`\`\n${response}\n\`\`\`` 
+            });
         } catch (error) {
             await interaction.editReply({ content: `Error: ${error.message}` });
         }

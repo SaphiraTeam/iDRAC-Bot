@@ -1,9 +1,15 @@
-const { Client, Collection, Events, REST, Routes } = require('discord.js');
+const { Client, Collection, Events, REST, Routes, GatewayIntentBits } = require('discord.js');
 const { token, clientId, guildId } = require('./config');
 const fs = require('fs');
 const path = require('path');
 
-const client = new Client({ intents: [] });
+const client = new Client({ 
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ] 
+});
 client.commands = new Collection();
 
 async function deployCommands() {
