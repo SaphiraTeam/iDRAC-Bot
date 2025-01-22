@@ -2,7 +2,6 @@
 
 A powerful Discord bot for managing Dell servers remotely through IPMI commands. Monitor and control your Dell servers with easy-to-use Discord slash commands.
 
-![iDRAC Bot Banner](docs/images/banner.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Discord.js](https://img.shields.io/badge/Discord.js-v14-blue.svg)](https://discord.js.org)
