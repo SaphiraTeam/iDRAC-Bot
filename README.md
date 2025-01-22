@@ -103,8 +103,7 @@ node .
 
 ## 📞 Support & Community
 
-- [Discord Server](https://discord.gg/your-server)
-- [GitHub Issues](https://github.com/yourusername/iDRAC-Bot/issues)
+- [GitHub Issues](https://github.com/saphirateam/iDRAC-Bot/issues)
 
 ## 📦 Dependencies
 
