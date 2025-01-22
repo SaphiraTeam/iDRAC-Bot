@@ -1,0 +1,14 @@
+{
+  "name": "server-manager-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for managing Dell PowerEdge servers via IPMI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "sqlite3": "^5.1.6",
+    "dotenv": "^16.3.1"
+  }
+}
