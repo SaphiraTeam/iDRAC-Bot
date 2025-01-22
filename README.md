@@ -75,8 +75,8 @@ node .
 | Command | Description | Example |
 |---------|-------------|---------|
 | `/setup` | Configure IPMI settings | `/setup ip:192.168.1.100 username:admin password:pass` |
-| `/monitor start` | Sends and starts the Monitor embed | `/server fans` |
-| `/monitor stop` | Stops the monitor embed and makes it not update | `/server fans` |
+| `/monitor start` | Sends and starts the Monitor embed | `/monitor start` |
+| `/monitor stop` | Stops the monitor embed and makes it not update | `/monitor stop` |
 | `/server status` | Get power status | `/server status` |
 | `/server fans` | View fan speeds | `/server fans` |
 | `/server setfan` | Set fan speed | `speed: 0-100` |
