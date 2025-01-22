@@ -21,7 +21,7 @@ A powerful Discord bot for managing Dell servers remotely through IPMI commands.
 ## 📋 Prerequisites
 
 - Node.js (v16.9.0 or higher)
-- IPMItool installed on your system
+- IPMItool installed on your system [Download from Dell.com](https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=m63f3)
 - A Dell server with iDRAC configured
 - A Discord application and bot token
 - SQLite3
@@ -112,9 +112,6 @@ node .
 - discord.js: ^14.0.0
 - sqlite3: ^5.0.0
 - dotenv: ^16.0.0
-
-### System Dependencies
-- IPMI Tool (Windows) [Download from Dell](https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=m63f3)
 
 ## 📜 License
 
